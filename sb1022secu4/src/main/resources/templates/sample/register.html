@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>회원가입</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h2 class="text-center">회원 정보 입력</h2>
+  <form th:action="@{/sample/step3}" th:object="${registerRequest}" method="post" class="border p-4 rounded shadow">
+    <div class="form-group">
+      <label>이메일:</label>
+      <input type="email" th:field="*{email}" class="form-control" required />
+    </div>
+    <div class="form-group">
+      <label>이름:</label>
+      <input type="text" th:field="*{name}" class="form-control" required />
+    </div>
+    <div class="form-group">
+      <label>비밀번호:</label>
+      <input type="password" th:field="*{password}" class="form-control" required />
+    </div>
+    <div class="form-group">
+      <label>비밀번호 확인:</label>
+      <input type="password" th:field="*{confirmPassword}" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">가입 완료</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

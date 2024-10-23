@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>부서 관리</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+
+    <table class="table">
+
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">부서번호</th>
+            <th scope="col">부서 이름</th>
+            <th scope="col">워치</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dept : ${departments}">
+            <td>
+                <a th:href="@{/emplist/{deptno}(deptno=${dept.deptno})}" th:text="${dept.deptno}" style="text-decoration: none; color: inherit;"></a>
+            </td>
+            <td th:text="${dept.dname}"></td>
+            <td th:text="${dept.loc}"></td>
+        </tr>
+        </tbody>
+
+    </table>
+    <a href="/departments/add" class="btn btn-success mt-3">부서 추가</a>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

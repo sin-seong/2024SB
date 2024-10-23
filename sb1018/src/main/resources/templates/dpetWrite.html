@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>부서 추가</title>
+</head>
+<body>
+<div class="container mt-5">
+  <h1 class="mb-4">부서 추가</h1>
+  <form action="/departments/add" method="post">
+    <div class="form-group">
+      <label for="deptno">부서 번호:</label>
+      <input type="number" id="deptno" name="deptno" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="dname">부서 이름:</label>
+      <input type="text" id="dname" name="dname" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="loc">위치:</label>
+      <input type="text" id="loc" name="loc" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">부서 추가</button>
+  </form>
+  <br>
+  <a href="/list" class="btn btn-secondary">부서 목록으로 돌아가기</a>
+</div>
+</body>
+</html>

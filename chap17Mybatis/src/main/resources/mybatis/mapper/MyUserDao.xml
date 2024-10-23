@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.chap17mybatis.dao.ArticleDao">
+<!--    <select id="selectCount" resultType="com.example.chap17mybatis.model.Article">-->
+<!--        select count(*) from article-->
+<!--    </select>-->
+<!--    <select id="select" resultType="com.example.chap17mybatis.model.Article">-->
+<!--        select article_id,-->
+<!--                +   group_id, sequence_no, posting_date,-->
+<!--               + read_count, writer_name, password, title,-->
+<!--                   + from article order by sequence_no desc limit #{firsRow}, #{endRow}-->
+<!--    </select>-->
+
+</mapper>
