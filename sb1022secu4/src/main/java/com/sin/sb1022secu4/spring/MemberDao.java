@@ -3,7 +3,6 @@ package com.sin.sb1022secu4.spring;
 
 
 import com.sin.sb1022secu4.entity.Member;
-import com.sin.sb1022secu4.entity.Member2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -75,19 +74,19 @@ public class MemberDao {
 				member.getUsername(), member.getPassword(), member.getEmail());
 	}
 
-	public List<Member2> selectAll() {
-		List<Member2> results = jdbcTemplate.query("select * from MEMBER",
-				(ResultSet rs, int rowNum) -> {
-					Member2 member = new Member2(
-							rs.getString("EMAIL"),
-							rs.getString("PASSWORD"),
-							rs.getString("NAME"),
-							rs.getTimestamp("REGDATE").toLocalDateTime());
-					member.setId(rs.getLong("ID"));
-					return member;
-				});
-		return results;
-	}
+//	public List<Member2> selectAll() {
+//		List<Member2> results = jdbcTemplate.query("select * from MEMBER",
+//				(ResultSet rs, int rowNum) -> {
+//					Member2 member = new Member2(
+//							rs.getString("EMAIL"),
+//							rs.getString("PASSWORD"),
+//							rs.getString("NAME"),
+//							rs.getTimestamp("REGDATE").toLocalDateTime());
+//					member.setId(rs.getLong("ID"));
+//					return member;
+//				});
+//		return results;
+//	}
 
 	public int count() {
 		Integer count = jdbcTemplate.queryForObject(

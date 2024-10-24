@@ -14,45 +14,45 @@ import java.util.List;
 
 public class AnsweredData {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue()
+	@Column(name="member_id")
 	private Long id;
 
-
-
-	@OneToMany
-	@JoinColumn(name = "answered_data_id")
-	private List<Question> questions;
-
 	@ElementCollection
-	@CollectionTable(name = "answered_data_responses", joinColumns = @JoinColumn(name = "answered_data_id"))
-	@Column(name = "response_text")
+	@CollectionTable(
+			name = "responses",
+			joinColumns = @JoinColumn(name = "MEMBER_ID")
+	)
+	@OrderColumn
+	@Column(name = "seq")
 	private List<String> responses;
 
-	@Embedded
+	@OneToOne
+	@JoinColumn(name="RESPONDENT_ID")
 	private Respondent res;
 
-	public List<Question> getQuestions() {
-		return questions;
-	}
-
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
-	}
-
-	public List<String> getResponses() {
-		return responses;
-	}
-
-	public void setResponses(List<String> responses) {
-		this.responses = responses;
-	}
-
-	public Respondent getRes() {
-		return res;
-	}
-
-	public void setRes(Respondent res) {
-		this.res = res;
-	}
+//	public List<Question> getQuestions() {
+//		return questions;
+//	}
+//
+//	public void setQuestions(List<Question> questions) {
+//		this.questions = questions;
+//	}
+//
+//	public List<String> getResponses() {
+//		return responses;
+//	}
+//
+//	public void setResponses(List<String> responses) {
+//		this.responses = responses;
+//	}
+//
+//	public Respondent getRes() {
+//		return res;
+//	}
+//
+//	public void setRes(Respondent res) {
+//		this.res = res;
+//	}
 
 }

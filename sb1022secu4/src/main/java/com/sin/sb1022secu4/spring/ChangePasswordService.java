@@ -2,7 +2,6 @@ package com.sin.sb1022secu4.spring;
 
 
 import com.sin.sb1022secu4.entity.Member;
-import com.sin.sb1022secu4.entity.Member2;
 import org.springframework.transaction.annotation.Transactional;
 
 public class ChangePasswordService {
