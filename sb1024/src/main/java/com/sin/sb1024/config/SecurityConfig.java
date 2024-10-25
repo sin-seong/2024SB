@@ -34,7 +34,9 @@ public class SecurityConfig {
                 .antMatchers("/sample/member").permitAll()
                 .antMatchers("/sample/admin").hasRole("ADMIN")
                 .antMatchers("/sample/register").permitAll()
-//                .antMatchers("/login").permitAll()
+                .antMatchers("/board/**").permitAll()
+                .antMatchers("/mapper/**").permitAll()
+                .antMatchers("/images/**").permitAll()
                 .antMatchers("/sample/step3").permitAll()
                 .anyRequest().authenticated();
         http.formLogin().loginPage("/sample/login").permitAll()

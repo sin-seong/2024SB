@@ -1,0 +1,24 @@
+/*figure {*/
+/*    position: relative;*/
+/*    margin: 0;*/
+/*    overflow: hidden;*/
+/*    padding: 0 20px; !* 양쪽 여백 추가 *!*/
+/*    width: calc(100% - 40px); !* 여백을 제외한 너비 *!*/
+/*    height: 100vh; !* 화면 높이에 맞춤 *!*/
+/*}*/
+
+/*video {*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    min-width: 100%; !* 최소 너비를 100%로 설정 *!*/
+/*    min-height: 100%; !* 최소 높이를 100%로 설정 *!*/
+/*    width: auto; !* 비디오의 비율 유지 *!*/
+/*    height: auto; !* 비디오의 비율 유지 *!*/
+/*    transform: translate(-50%, -50%); !* 중앙 정렬 *!*/
+/*}*/
+body {
+    background-color: #a0a0a0;/* 어두운 회색 */
+    margin: 0; /* 기본 여백 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+}
