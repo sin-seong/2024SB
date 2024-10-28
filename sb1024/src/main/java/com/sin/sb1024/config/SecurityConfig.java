@@ -38,6 +38,8 @@ public class SecurityConfig {
                 .antMatchers("/mapper/**").permitAll()
                 .antMatchers("/images/**").permitAll()
                 .antMatchers("/sample/step3").permitAll()
+                .antMatchers("/sample/agree").permitAll()
+                .antMatchers("/message/**").permitAll()
                 .anyRequest().authenticated();
         http.formLogin().loginPage("/sample/login").permitAll()
                 .and()

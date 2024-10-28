@@ -52,6 +52,10 @@ public class SampleController {
 
 
     }
+    @PostMapping("/login")
+    public String login(Authentication authentication) {
+        return "redirect:/sample/all";
+    }
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

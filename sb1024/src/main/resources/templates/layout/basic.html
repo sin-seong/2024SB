@@ -19,7 +19,7 @@
         <div class="sidebar-heading border-bottom bg-light">목록</div>
         <div class="list-group list-group-flush">
             <a class="list-group-item list-group-item-action list-group-item-light p-3"
-               href="/login"
+               href="/sample/login"
                sec:authorize="!isAuthenticated()">로그인</a>
 
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sample/member">개인정보</a>
@@ -29,9 +29,9 @@
                sec:authorize="hasRole('ROLE_ADMIN')">관리자방</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sample/all">홈</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3"
-               th:if="${isLoggedIn}"
+
                href="/sample/logout">로그아웃</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sample/register">회갑</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/sample/agree">회갑</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/survey">설문조4</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/board/openBoardList.do">게시판</a>
         </div>
