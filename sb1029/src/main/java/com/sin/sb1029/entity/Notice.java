@@ -1,12 +1,11 @@
 package com.sin.sb1029.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -14,6 +13,7 @@ import javax.persistence.*;
 @Data
 @ToString
 @Table(name="notice")
+@Builder
 public class Notice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +25,10 @@ public class Notice {
     private String contents;
 
     @ColumnDefault("0") //default 0
-    private Integer hitCnt;
+    private Integer hitCnt =0;
 
     private String creatorId;
-
+//@CreationTimestamp
     private String createdDatetime;
 
     private String updaterId;
