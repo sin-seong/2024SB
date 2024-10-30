@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import com.sin.sb1030.service.AuthInfo;
 import com.sin.sb1030.service.ChangePasswordService;
 import com.sin.sb1030.service.WrongIdPasswordException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/edit/changePassword")
 public class ChangePwdController {
 
+	@Autowired
 	private ChangePasswordService changePasswordService;
 
-	public void setChangePasswordService(
-			ChangePasswordService changePasswordService) {
-		this.changePasswordService = changePasswordService;
-	}
+//	public void setChangePasswordService(
+//			ChangePasswordService changePasswordService) {
+//		this.changePasswordService = changePasswordService;
+//	}
 
 	@GetMapping
 	public String form(

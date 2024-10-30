@@ -2,10 +2,12 @@ package com.sin.sb1030.service;
 
 import com.sin.sb1030.dto.Member;
 import com.sin.sb1030.dto.MemberDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+@Service
 public class ChangePasswordService {
-
+	@Autowired
 	private MemberDao memberDao;
 
 	@Transactional
