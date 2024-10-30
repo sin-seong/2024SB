@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>메인 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/videos.css}"/>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <figure>
+        <video src="/video/EllinForest.mp4" autoplay muted loop style="width: 100%; height: auto; object-fit: cover;"></video>
+        <div class="inner">
+            <div th:if="${empty authInfo}">
+                <p>환영합니다!</p>
+                <p>
+                    <a th:href="@{/register/step1}">[회원가입하기]</a>
+                    <a th:href="@{/login}">[로그인]</a>
+                </p>
+            </div>
+
+            <div th:if="${!empty authInfo}">
+                <p th:text="${authInfo.name} + '님, 환영합니다.'"></p>
+                <p>
+                    <a th:href="@{/edit/changePassword}">[비밀번호 변경]</a>
+                    <a th:href="@{/logout}">[로그아웃]</a>
+                </p>
+            </div>
+        </div>
+    </figure>
+</div>
+</body>
+</html>
