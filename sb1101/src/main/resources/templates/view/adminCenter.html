@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>개인정보</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+
+    /* 페이지 배경 어둡게 설정 */
+    body {
+      background-color: #343a40;  /* 어두운 회색 */
+      color: white;  /* 텍스트 색상 */
+    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #343a40;
+      color: white;
+      padding: 15px;
+      z-index: 1000; /* 헤더가 가장 위에 있도록 설정 */
+    }
+
+    /* 사이드바 스타일 */
+    .sidebar {
+      position: fixed;
+      top: 100px;  /* 헤더 아래에 위치하도록 설정 */
+      left: 0;
+      width: 250px;
+      height: 100vh;
+      background-color: #495057;
+      padding-top: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      z-index: 500; /* 사이드바가 본문보다 위에 있도록 설정 */
+    }
+
+    /* 사이드바 메뉴 항목 스타일 */
+    .sidebar .list-group-item {
+      background-color: #495057;
+      color: white;
+      border: none;
+      border-radius: 0;
+      margin-top: 10px;  /* 각 메뉴 항목 간의 간격을 넓힘 */
+    }
+
+    .sidebar .list-group-item:hover {
+      background-color: #6c757d;
+      cursor: pointer;
+    }
+
+    .sidebar .list-group-item.active {
+      background-color: #ffffff;
+      border-color: white;
+    }
+
+    /* 본문 영역 스타일 */
+    .content {
+      margin-top: 80px;  /* 헤더 높이만큼 위에서 밀기 */
+      margin-left: 250px;  /* 사이드바 너비만큼 왼쪽 여백 추가 */
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #495057;
+      color: white;
+    }
+
+    /* 버튼 스타일 */
+    .btn-danger {
+      background-color: #dc3545;
+      border-color: #c82333;
+    }
+
+    /* 로그아웃 버튼 아래 여백 */
+    .btn-danger.mt-4 {
+      margin-bottom: 30px;
+    }
+
+    /* 푸터 스타일 */
+    .footer {
+      margin-top: 3rem;
+    } /* 클릭 시 배경색 변경 */
+    .list-group-item.active:hover {
+      background-color: #5697e6;  /* active 상태에서 hover 시 색상 */
+      opacity: 0.5;
+    }
+    .list-group-item.active {
+        background-color: #616161;  /* 선택된 상태 배경 색상 */
+        color: #090909;  /* 글자 색상 흰색 */
+      }
+
+
+
+  </style>
+  <script>
+    window.onload = function() {
+      const currentPage = window.location.pathname.split("/").pop();
+
+      // active 클래스를 해당 메뉴에 추가하는 함수
+      function setActiveMenu(menuId) {
+        let menuItems = document.querySelectorAll('.list-group-item');
+        menuItems.forEach(function(item) {
+          item.classList.remove('active');  // 모든 항목에서 active 클래스 제거
+        });
+        // 클릭된 메뉴 항목에 active 클래스 추가
+        const menuItem = document.getElementById(menuId);
+        if (menuItem) {
+          menuItem.classList.add('active');
+        }
+      }
+
+      // 페이지 경로에 따라 메뉴 항목 활성화
+      if (currentPage === 'userInfo') {
+        setActiveMenu('user-info');
+      } else if (currentPage === 'settings') {
+        setActiveMenu('settings');
+      } else if (currentPage === 'help') {
+        setActiveMenu('help');
+      }
+    };
+  </script>
+</head>
+<body>
+<div th:replace="layout/header :: header"></div>
+
+<div class="sidebar">
+  <ul class="list-group">
+    <li class="list-group-item" id="user-info" onclick="location.href='userInfo'" style="margin-top: 100px">
+      개인정보
+    </li>
+    <li class="list-group-item" id="settings" onclick="location.href='settings'">
+      설정
+    </li>
+    <li class="list-group-item" id="help" onclick="location.href='help'">
+      도움말
+    </li>
+    <li class="list-group-item" id="userProfile" onclick="location.href='userProfile'">
+      
+    </li>
+  </ul>
+</div>
+
+<div class="container">
+<div class="container d-flex justify-content-center mt-5">
+</div>
+</div>
+
+<div class="content">
+<div class="container mt-5">
+  <h2>개인정보</h2>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">이름: <span th:text="${user.username}"></span></h5>
+      <p class="card-text">이메일: <span th:text="${user.email}"></span></p>
+      <p class="card-text">소속: <span th:text="${user.department}"></span></p>
+      <p class="card-text">레벨: <span th:text="${user.level}"></span></p>
+    </div>
+  </div>
+
+  <!-- 로그아웃 버튼 -->
+  <a href="/logout" class="btn btn-danger mt-4">로그아웃</a>
+</div>
+
+<!-- 푸터 -->
+<div th:replace="layout/footer :: footer" class="mt-5 footer"></div>
+</body>
+
+</html>
