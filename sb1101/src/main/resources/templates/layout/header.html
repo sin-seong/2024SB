@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<header class="text-white p-4 d-flex align-items-center" style="background-color: black;">
+
+  <div class="me-3"style="position: relative; z-index: 2;"> <!-- 이미지 왼쪽 배치 -->
+    <a href="/"><img class="logo" alt="게임 사이트 로고" src="/images/logo.png" style="max-width: 150px;"></a>
+  </div>
+  <nav class="navbar navbar-expand-lg" style="background-color: black;">
+    <div class="container" style="background-color: #0000 !important;">
+      <nav class="ms-auto"> <!-- 내비게이션 오른쪽 정렬 -->
+        <ul class="nav">
+
+          <li class="nav-item"><a class="nav-link text-white" th:href="@{/main}">홈</a></li>
+          <li class="nav-item"><a class="nav-link text-white" th:href="@{/notices}">공지사항</a></li>
+          <li class="nav-item"><a class="nav-link text-white" th:href="@{/games}">게임 목록</a></li>
+          <li class="nav-item"><a class="nav-link text-white" th:href="@{/news}">게임 뉴스</a></li>
+          <li class="nav-item"><a class="nav-link text-white" th:href="@{/about}">소개</a></li>
+          <li class="nav-item"><a class="nav-link text-white" th:href="@{/fnotice}">게시판</a></li>
+          <li class="nav-item"><a class="nav-link text-white" th:href="@{/userInfo}" th:if="${session.user != null}">마이페이지</a></li>
+          <li class="nav-item" th:if="${role == 'admin'}"><a class="nav-link text-white" th:href="@{/adminCenter}">관리자 센터</a></li>
+          <!--          <li class="nav-item"><a class="nav-link text-white" th:href="@{/logout}">로그아웃</a></li>-->
+<!--          <button class="btn-m" onclick="document.getElementById('myAudio').play()">-->
+<!--            <img src="https://twemoji.maxcdn.com/v/13.0.0/72x72/1f3b5.png" alt="🎵" style="width: 50px; height: 50px; border: none;">-->
+<!--          </button>-->
+          <audio autoplay loop >
+            <source src="/static/music/EllinForest.mp3" type="audio/mp3">
+            이 브라우저는 오디오를 지원하지 않습니다.
+          </audio>
+        </ul>
+
+      </nav>
+    </div>
+  </nav>
+</header>

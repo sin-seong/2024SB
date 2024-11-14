@@ -1,10 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>게임 사이트</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+  <link rel="stylesheet" th:href="@{/css/mainPage.css}">
+  <style>
+
+  </style>
 </head>
 <body>
-$END$
+<!--<audio autoplay loop>-->
+<!--  <source src="/music/EllinForest.mp3" type="audio/mp3">-->
+<!--  이 브라우저는 오디오를 지원하지 않습니다.-->
+<!--</audio>-->
+
+<!-- 헤더 포함 -->
+<div th:replace="layout/header :: header"></div>
+
+
+<!-- 메인 콘텐츠 -->
+<div class="container">
+  <div>
+    <img alt="게임 사이트 이미지" src="/images/main_game_image4.jpg" class="main-image">
+  </div>
+
+  <!-- 이미지 + 공지사항 + 이벤트 -->
+  <div class="main-content">
+
+    <div class="row">
+      <!-- 공지사항 -->
+      <div class="game-notices">
+
+        <h3><a href="/notices">공지사항</a></h3>
+        <div class="game-split"></div>
+        <div class="notice-list">
+          <div th:if="${#lists.isEmpty(noticeList)}">공지사항이 없습니다.</div>
+          <table>
+            <tr th:each="notice : ${noticeList}">
+              <!-- 카테고리와 제목을 하나의 링크로 연결 -->
+              <td th:text=" ${notice.category}" class="n-text">
+              </td>
+              <td>
+                <a th:href="@{/notice/read(id=${notice.id})}"
+                   th:text="${notice.title}"  ></a>
+              </td>
+              <td><!-- 날짜 포맷을 설정한 메서드를 사용 -->
+                <span th:text="${#temporals.format(notice.date, 'yyyy-MM-dd')}" class="n-text" ></span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+
+      <!-- 게임 이벤트 -->
+      <div class="game-events">
+        <h3><a href="/fnotice">게시판</a></h3>
+        <div class="game-split"></div>
+        <table>
+          <tr th:each="fnotice : ${fnoticeList}">
+            <td>
+              <a th:href="@{/fnotice/{id}(id=${fnotice.id})}"  th:text="${fnotice.title}"></a>
+            </td>
+            <td>
+              <span th:text="${#temporals.format(fnotice.date, 'yyyy-MM-dd')}"></span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 오른쪽 유저 프로필 및 로그인 -->
+  <div class="btn-container">
+
+    <div th:if="${user == null}">
+      <a href="/login"><button class="btn-custom">로그인</button></a>
+      <a href="/signup">
+        <button class="btn-custom signup-btn">회원가입</button>
+      </a>
+    </div>
+
+
+    <div th:if="${user != null}">
+      <ul class="d-flex align-items-start" style="margin: 0;">
+        <li><span class="material-symbols-rounded" style="margin-top: 2px;">person</span>&nbsp;&nbsp;</li>
+        <li class="profile-header" th:text="${user.username} + '님, 환영합니다.'"></li>
+      </ul>
+      <hr>
+        <table class="table">
+          <tr>
+            <td>이메일</td>
+            <td th:text="${user.email}"></td>
+          </tr>
+          <tr>
+            <td>소속</td>
+            <td th:text="${user.department}"></td>
+          </tr>
+          <tr>
+            <td>레벨</td>
+            <td th:text="${user.level}"></td>
+          </tr>
+        </table>
+        <div class="profile-buttons">
+          <a href="/userInfo"><button class="btn btn-primary">마이페이지</button></a>
+          <a href="/logout"><button class="btn btn-secondary">로그아웃</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="extra-space-container">
+  <!-- 여기에 추가적인 공간이나 요소를 넣을 수 있습니다. -->
+
+</div>
+
+<!-- 푸터 -->
+<footer class="footer">
+  COPYRIGHT(C) 2024 Apocalyptic Exit ALL RIGHTS RESERVED.
+</footer>
+
+<!-- 스크립트 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

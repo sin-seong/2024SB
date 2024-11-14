@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>회원 조회</title>
 </head>
 <body>
-$END$
+<form th:action="@{/members}" th:object="${cmd}" method="post">
+  <p>
+    <label>From: <input type="date" th:field="*{from}"/></label>
+  <div th:errors="*{from}"></div>
+  ~
+  <label>To: <input type="date" th:field="*{to}"/></label>
+  <div th:errors="*{to}"></div>
+  <input type="submit" value="조회">
+  </p>
+</form>
+
+<div th:if="${not #lists.isEmpty(members)}">
+  <table>
+    <tr>
+      <th>아이디</th>
+      <th>이메일</th>
+      <th>이름</th>
+      <th>가입일</th>
+    </tr>
+    <th:block th:each="mem : ${members}">
+      <tr>
+        <td th:text="${mem.id}"></td>
+        <td>
+          <a th:href="@{/members/{id}(id=${mem.id})}">
+            <span th:text="${mem.email}"></span>
+          </a>
+        </td>
+        <td th:text="${mem.name}"></td>
+        <td th:text="${#temporals.format(mem.registerDateTime, 'yyyy-MM-dd')}"></td>
+      </tr>
+    </th:block>
+  </table>
+</div>
 </body>
 </html>

@@ -1,27 +1,27 @@
-package controller;
+package com.sin.sb1030.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
-
+@Setter
+@Getter
+@ToString
+@AllArgsConstructor
+@Data
 public class ListCommand {
 	
-	@DateTimeFormat(pattern = "yyyyMMddHH")
-	private LocalDateTime from;
-	@DateTimeFormat(pattern = "yyyyMMddHH")
-	private LocalDateTime to;
-	
-	public LocalDateTime getFrom() {
-		return from;
-	}
-	public void setFrom(LocalDateTime from) {
-		this.from = from;
-	}
-	public LocalDateTime getTo() {
-		return to;
-	}
-	public void setTo(LocalDateTime to) {
-		this.to= to;
-	}
+//	@DateTimeFormat(pattern = "yyyyMMddHH")
+//	private LocalDateTime from;
+//	@DateTimeFormat(pattern = "yyyyMMddHH")
+//	private LocalDateTime to;
 
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private LocalDate from;
+
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private LocalDate to;
+
+	public ListCommand() {}
 }

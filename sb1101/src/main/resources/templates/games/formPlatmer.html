@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+  <title>2D 폼플랫머 게임</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: url('/images/from_game.jpg') no-repeat center center fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    canvas {
+      display: block;
+      margin: 0 auto;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #005f73;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Thymeleaf로 header를 삽입 -->
+<div th:replace="layout/header :: header"></div>
+
+<!-- 게임 캔버스와 시작 버튼 -->
+<canvas id="gameCanvas"></canvas>
+<button id="startButton">게임 시작</button>
+
+<script>
+  // 게임 초기 설정
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  const startButton = document.getElementById('startButton');
+
+  canvas.width = 800; // 캔버스 너비
+  canvas.height = 600; // 캔버스 높이
+
+  // 게임 요소
+  const playerWidth = 50;
+  const playerHeight = 50;
+  let playerX = 100;
+  let playerY = canvas.height - 50 - 20; // 처음 캐릭터 위치를 바닥에 정확히 맞추기 위해 수정
+  let playerSpeed = 5;
+  let gravity = 0.5;
+  let velocityY = 0;
+  let isJumping = false;
+  let canDoubleJump = true;  // 더블 점프 가능 여부
+  let isDashing = false;     // 대쉬 중인지 여부
+  let dashDuration = 0;       // 대쉬 시간 추적
+  let dashSpeed = 15;         // 대쉬 속도 증가
+  const normalSpeed = 5;      // 기본 속도
+
+  // 키 입력
+  let leftPressed = false;
+  let rightPressed = false;
+  let spacePressed = false;
+  let shiftPressed = false;  // 대쉬 활성화 키 (Shift)
+
+  const platforms = [
+    { x: 0, y: canvas.height - 50, width: canvas.width, height: 20 }, // 바닥
+    { x: 100, y: 450, width: 200, height: 20 }, // 1번째 플랫폼
+    { x: 350, y: 350, width: 180, height: 20 }, // 2번째 플랫폼
+    { x: 600, y: 250, width: 200, height: 20 }, // 3번째 플랫폼
+    { x: 200, y: 150, width: 120, height: 20 }, // 4번째 플랫폼
+    { x: 500, y: 100, width: 100, height: 20 }, // 5번째 플랫폼
+    { x: 700, y: 50, width: 100, height: 20 }   // 6번째 플랫폼
+  ];
+
+  // 게임 시작 여부
+  let gameStarted = false;
+
+  // 키 이벤트 리스너
+  window.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowLeft') leftPressed = true;
+    if (event.key === 'ArrowRight') rightPressed = true;
+    if (event.key === ' ' && !isJumping) {
+      spacePressed = true;  // 스페이스바로 점프
+    }
+    if (event.key === 'Shift') {
+      shiftPressed = true;  // Shift 키로 대쉬
+    }
+  });
+
+  window.addEventListener('keyup', function(event) {
+    if (event.key === 'ArrowLeft') leftPressed = false;
+    if (event.key === 'ArrowRight') rightPressed = false;
+    if (event.key === ' ') spacePressed = false;
+    if (event.key === 'Shift') shiftPressed = false;
+  });
+
+  // 게임 리셋 함수
+  function resetGame() {
+    playerX = 100;
+    playerY = canvas.height - 50 - 20; // 바닥 위에 위치
+    velocityY = 0;
+    canDoubleJump = true;  // 더블 점프 초기화
+    dashDuration = 0;       // 대쉬 초기화
+  }
+
+  // 게임 업데이트 함수
+  function updateGame() {
+    // 이동 처리
+    let speed = shiftPressed && dashDuration === 0 ? dashSpeed : normalSpeed; // 대쉬 중일 때 speed 증가
+    if (leftPressed) {
+      playerX -= speed;
+    }
+    if (rightPressed) {
+      playerX += speed;
+    }
+
+    // 점프 처리
+    if (spacePressed && !isJumping) {
+      velocityY = -12;  // 위로 점프하는 힘
+      isJumping = true;
+    } else if (spacePressed && canDoubleJump && !isJumping) {
+      velocityY = -12;  // 더블 점프
+      canDoubleJump = false;
+    }
+
+    // 중력 처리
+    velocityY += gravity;
+    playerY += velocityY;
+
+    // 바닥에 닿으면 떨어지지 않도록
+    if (playerY >= canvas.height - 50 - playerHeight) {
+      playerY = canvas.height - 50 - playerHeight;
+      velocityY = 0;
+      isJumping = false;
+      canDoubleJump = true;  // 땅에 닿으면 더블 점프 가능
+    }
+
+    // 대쉬 타이머
+    if (shiftPressed) {
+      if (dashDuration < 10) {
+        dashDuration++;
+      } else {
+        shiftPressed = false;
+        dashDuration = 0;
+      }
+    }
+
+    // 화면 밖으로 나가지 않도록 처리
+    if (playerX < 0) playerX = 0;
+    if (playerX + playerWidth > canvas.width) playerX = canvas.width - playerWidth;
+  }
+
+  // 게임 화면 그리기
+  function drawGame() {
+    // 배경 색상
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  // 화면 지우기
+    ctx.fillStyle = '#87CEEB';  // 하늘색 배경
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // 플랫폼 그리기
+    ctx.fillStyle = '#654321';  // 갈색 플랫폼
+    ctx.fillRect(0, canvas.height - 50, canvas.width, 20);
+
+    // 캐릭터 그리기
+    ctx.fillStyle = '#FF0000';  // 빨간색 캐릭터
+    ctx.fillRect(playerX, playerY, playerWidth, playerHeight);
+  }
+
+  // 게임 루프 함수
+  function gameLoop() {
+    if (!gameStarted) return;  // 게임이 시작되지 않으면 업데이트 및 그리기 중지
+    updateGame();
+    drawGame();
+    requestAnimationFrame(gameLoop);  // 다음 프레임에 다시 호출
+  }
+
+  // 게임 시작 버튼 클릭 이벤트 처리
+  startButton.addEventListener('click', function() {
+    gameStarted = true;
+    startButton.style.display = 'none'; // 게임 시작 후 버튼 숨기기
+    gameLoop(); // 게임 시작
+  });
+</script>
+
+</body>
+</html>

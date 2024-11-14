@@ -1,18 +1,38 @@
 @charset "UTF-8";
-.main--page--div {
-	width: 1142px;
+
+html, body {
+	margin: 0;      /* 기본 여백 제거 */
+	padding: 0;     /* 기본 패딩 제거 */
+	height: 100%;
+	background-color: black;/* 화면 전체를 사용하도록 설정 */
+
+}
+/* 전체 페이지 레이아웃 */
+.footer{
+	background-color: black;
+}
+.game-info {
+	width: 100%;
 	margin-bottom: 50px;
 	display: flex;
-	justify-content: flex-start;
-	flex-direction: column;
+	justify-content: space-between;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 30px;  /* 각 요소 사이 간격 */
 }
-
+.notice-list {
+	margin-bottom: 30px; /* 공지사항과 이벤트 사이에 30px의 간격 추가 */
+}
+.n-text{
+	color: white;
+}
 .main--page--img {
 	width: 1500px;
 	height: 500px;
-	margin-bottom: 40px;
+	margin-bottom: 40px; /* 이미지 테두리 부드럽게 */
 }
 
+/* Material Symbol 아이콘 스타일 */
 .material-symbols-rounded {
 	font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 40;
 }
@@ -25,29 +45,39 @@
 	font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 40 !important;
 }
 
-.main--page--notice {
+/* 공지사항 테이블 */
+.game-notice {
 	margin-right: 120px;
 }
 
-.main--page--notice tr td:first-of-type {
+.game-notice tr td:first-of-type {
 	width: 450px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: inline-block;
 	margin-right: 20px;
+	color: white;
 }
 
-.main--page--notice tr td a {
-	font-size: 19px;
+.game-notice tr td a {
+	font-size: 18px;
+	color: #ffffff;
+	text-decoration: none;
 }
 
-.main--page--calander tr td:first-of-type {
+.game-notice tr td a:hover {
+	color: #007bff;
+	text-decoration: underline;
+}
+
+/* 게임 이벤트 테이블 */
+.game-events tr td:first-of-type {
 	padding-right: 28px;
 	text-align: right;
 }
 
-.main--page--calander tr td:last-of-type {
+.game-events tr td:last-of-type {
 	font-size: 19px;
 	max-width: 400px;
 	min-width: 341px;
@@ -56,19 +86,36 @@
 	text-overflow: ellipsis;
 }
 
-.main--page--split {
+/* 분리선 */
+.game-split {
 	height: 2px;
 	width: 100%;
 	background-color: #3c668a;
 	margin-bottom: 10px;
+	margin-top: 20px;
+	color: white;
+}
+.game-events table {
+	width: 100%;
+	border-spacing: 0 10px; /* 테이블 행 사이에 10px 간격 추가 */
 }
 
-.main--page--div h3 a {
+.game-events td {
+	padding: 8px 15px; /* 테이블 셀에 여백 추가 */
+}
+
+/* 제목 스타일 */
+.game-info h3 a {
 	font-weight: 600;
 	color: #132A50;
 }
 
-.main--page--profile {
+.game-info h3 a:hover {
+	color: #007bff;
+}
+
+/* 사용자 프로필 */
+.user-profile {
 	min-width: 300px;
 	padding: 20px;
 	display: flex;
@@ -78,18 +125,19 @@
 	justify-content: flex-start;
 	align-items: flex-start;
 	margin-left: 60px;
+	background-color: #f9f9f9;
 }
 
-.main--page--profile table {
+.user-profile table {
 	margin-bottom: 25px;
 }
 
-.main--page--profile table td {
+.user-profile table td {
 	color: #585858;
 	height: 27px;
 }
 
-.main--page--profile table tr td:first-of-type {
+.user-profile table tr td:first-of-type {
 	padding-right: 20px;
 }
 
@@ -101,30 +149,197 @@
 
 .profile--button--div button {
 	background-color: #98afcb;
-	padding: 3px 13px 4px;
+	padding: 8px 20px;
 	border: none;
 	border-radius: 5px;
 	color: white;
+	font-weight: 600;
+	cursor: pointer;
 }
 
-.main--page--info {
+.profile--button--div button:hover {
+	background-color: #6a8bb4;
+}
+
+/* 게임 정보 영역 */
+.game-alerts {
 	border: 1px solid #E0E0E0;
 	border-radius: 20px;
 	margin-left: 60px;
 	padding: 20px;
+	background-color: #f9f9f9;
 }
 
-.main--page--info p {
+.game-alerts p {
 	margin: 10px 0 0 0;
 	color: #585858;
 }
 
-.main--page--info p a {
+.game-alerts p a {
 	color: #1d57a3;
 	font-weight: 600;
 }
 
+.game-alerts p a:hover {
+	color: #007bff;
+	text-decoration: underline;
+}
+
+/* 푸터 */
 footer {
 	margin: 80px 0 30px 0;
 	text-align: center;
+	font-size: 14px;
+	color: #585858;
+}
+
+footer a {
+	color: #132A50;
+	text-decoration: none;
+}
+
+footer a:hover {
+	text-decoration: underline;
+}
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	background-color: #000000;
+	width: 100%;     /* 가로 크기를 부모 요소나 화면의 100%로 설정 */
+	height: 100%;
+}
+.body
+{
+	background-color: black;
+}
+
+.main-content {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	flex-direction: column;
+	width: 70%;
+	padding: 20px;
+}
+
+.user-info-container {
+	width: 25%;
+	padding: 20px;
+	background: #f8f9fa;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+}
+
+.main-image {
+	width: 100%;
+	height: 100%;
+	max-height: 400px;
+	object-fit: cover;
+	background-color: #444;
+}
+
+.game-notices, .game-events {
+	margin-top: 20px;
+}
+
+.profile-header {
+	font-size: 1.5rem; /* 폰트 크기 조정 */
+	font-weight: bold;
+	color: #fff;
+}
+.profile-container {
+	border: 1px solid #ccc; /* 테두리 색상 */
+	padding: 20px;
+	border-radius: 8px; /* 모서리 둥글게 처리 */
+	background-color: #333; /* 배경색 어두운 색상 */
+	color: #fff; /* 폰트 색상 흰색 */
+}
+.table td {
+	padding: 10px;
+	border: 1px solid #444; /* 테이블의 셀 테두리 색상 */
+	color: #fff;
+}
+.extra-space-container {
+	padding: 300px; /* 프로필 내용과의 공간을 띄워서 여백을 만들기 */
+	 /* 테두리 색상 */
+	border-radius: 8px;
+	background-color: #000; /* 배경색 */
+	color: white; /* 텍스트 색상 흰색 */
+}
+
+/* 추가적인 공간 내 텍스트 스타일 */
+.extra-space-container p {
+	font-size: 1.2rem;
+	line-height: 1.6;
+	color: white;
+}
+
+.profile-buttons {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 15px;
+
+}
+.profile-buttons button {
+	margin-right: 10px;
+	border-radius: 5px;
+}
+.profile-buttons .btn-primary {
+	background-color: #007bff; /* 버튼 색상 */
+	color: white;
+}
+.profile-buttons .btn-secondary {
+	background-color: #6c757d; /* 버튼 색상 */
+	color: white;
+}
+
+footer {
+	margin-top: 40px;
+	text-align: center;
+}
+/* 버튼들을 감싸는 컨테이너 스타일 */
+.btn-container {
+	display: flex; /* 버튼들을 가로로 배치 */
+	gap: 10px; /* 버튼들 사이 간격 */
+	align-items: center; /* 버튼들을 세로로 중앙 정렬 */
+}
+
+/* 기존 로그인 버튼 스타일 */
+.btn-custom {
+	background: linear-gradient(135deg, #6e7dff, #33a4fc); /* 그라디언트 배경 */
+	color: #fff; /* 글자 색상 */
+	border: none; /* 테두리 없애기 */
+	padding: 12px 30px; /* 여백 */
+	font-size: 16px; /* 폰트 크기 */
+	font-weight: 600; /* 글씨 두께 */
+	border-radius: 50px; /* 둥근 테두리 */
+	transition: all 0.3s ease; /* 효과를 부드럽게 */
+	text-align: center;
+	text-transform: uppercase; /* 대문자로 변환 */
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+}
+
+/* 호버 효과 */
+.btn-custom:hover {
+	background: linear-gradient(135deg, #33a4fc, #6e7dff); /* 그라디언트 방향 반전 */
+	transform: translateY(-3px); /* 살짝 위로 이동 */
+	box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* 그림자 효과 강화 */
+	cursor: pointer; /* 마우스 커서 변경 */
+}
+
+/* 회원가입 버튼 스타일 */
+.signup-btn {
+	background: #ff6f61; /* 회원가입 버튼 색상 */
+	border-radius: 50px; /* 둥근 테두리 */
+	padding: 12px 30px; /* 여백 */
+	transition: all 0.3s ease; /* 애니메이션 효과 */
+}
+
+/* 회원가입 버튼 호버 효과 */
+.signup-btn:hover {
+	background: #ff4a38; /* 호버 시 색상 변화 */
+	transform: translateY(-3px); /* 살짝 위로 이동 */
+	box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* 그림자 효과 강화 */
 }

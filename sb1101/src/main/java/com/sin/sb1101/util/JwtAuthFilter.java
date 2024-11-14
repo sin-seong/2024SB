@@ -5,8 +5,11 @@ import com.nimbusds.jose.JOSEException;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.text.ParseException;
 
-public class JwtAithFilter implements Filter {
+public class JwtAuthFilter implements Filter {
+
+    private static final String BEARER_PREFIX = "Bearer ";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -20,21 +23,24 @@ public class JwtAithFilter implements Filter {
 
         String authorization = req.getHeader("Authorization");
 
-        if(authorization != null && authorization.startsWith("Bearer ")) {
-            String token = authorization.substring(7);
+        if (authorization != null && authorization.startsWith("Bearer ")) {
+            String token = authorization.substring(BEARER_PREFIX.length());
 
-            try{
+            try {
                 String role = JwtUtil.extractRole(token);
 
-                if("admin".equals(role)) {
+                if ("admin".equals(role)) {
                     chain.doFilter(request, response);
                     return;
+                } else {
+                    throw new ServletException("Unauthorized: Invalid token or role");
                 }
-            }catch (JOSEException e){
-                throw new ServletException("Unauthorized: Invalid token or role");
+            } catch (ParseException | JOSEException e) {
+                throw new ServletException("Unauthorized: Invalid token", e);
             }
+        } else {
+            throw new ServletException("Unauthorized: Missing or invalid token");
         }
-        throw new ServletException("Unauthorized: Missing or invalid token");
     }
     @Override
     public void destroy(){

@@ -1,10 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게임 목록</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body{
+        background:#1d1d1d ;
+    }
+    /* 카드의 높이를 동일하게 맞추기 위해 Flexbox 사용 */
+    .card {
+        background: #4c4b4b;
+      display: flex;
+      flex-direction: column;
+      height: 100%; /* 카드의 높이를 부모 컨테이너에 맞게 설정 */
+      position: relative; /* 카드 내의 텍스트와 버튼을 고정시키기 위해 사용 */
+    }
+
+    .card-body {
+        background: #4c4b4b;
+      flex-grow: 1; /* 카드 본문이 최대 크기로 늘어나도록 설정 */
+      position: relative;
+      padding-bottom: 50px; /* 버튼이 카드 본문 하단에 위치하도록 여백 추가 */
+    }
+
+    /* 카드 이미지 크기 자동 조정 */
+    .card-img-top {
+      width: 100%; /* 이미지가 카드의 너비에 맞게 조정되도록 */
+      height: auto; /* 이미지 비율을 유지하면서 자동으로 높이 조정 */
+    }
+
+    /* 텍스트와 버튼을 카드의 하단에 고정 */
+    .card-footer {
+      position: absolute;
+      bottom: 10px; /* 카드 하단에 10px의 여백 */
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    /* 버튼 스타일 */
+    .btn-primary {
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
 
+<div th:replace="layout/header :: header"></div>
+
+<div class="container my-4">
+  <h1 class="text-center">게임 목록</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <h5 class="card-title">게임 1</h5>
+        <img src="/images/game1.jpg" class="card-img-top" alt="게임 1">
+        <div class="card-body">
+
+<!--          <p class="card-text">게임 1에 대한 설명입니다.</p>-->
+        </div>
+        <div class="card-footer">
+          <a href=/tetris class="btn btn-primary">게임 상세보기</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <h5 class="card-title">게임 2</h5>
+        <img src="/images/game_f.png" class="card-img-top" alt="게임 2">
+        <div class="card-body">
+
+<!--          <p class="card-text">게임 2에 대한 설명입니다.</p>-->
+        </div>
+        <div class="card-footer">
+          <a href="/game2" class="btn btn-primary">게임 상세보기</a>
+        </div>
+      </div>
+    </div>
+    <!-- 추가 게임 항목들 -->
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
