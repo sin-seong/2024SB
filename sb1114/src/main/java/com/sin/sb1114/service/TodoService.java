@@ -1,7 +1,8 @@
 package com.sin.sb1114.service;
 
-import com.example.demo.model.TodoEntity;
-import com.example.demo.persistence.TodoRepository;
+
+import com.sin.sb1114.model.TodoEntity;
+import com.sin.sb1114.persistence.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

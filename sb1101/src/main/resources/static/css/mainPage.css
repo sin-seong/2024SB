@@ -5,6 +5,7 @@ html, body {
 	padding: 0;     /* 기본 패딩 제거 */
 	height: 100%;
 	background-color: black;/* 화면 전체를 사용하도록 설정 */
+	overflow-x: hidden;
 
 }
 /* 전체 페이지 레이아웃 */
@@ -207,8 +208,10 @@ footer a:hover {
 	align-items: flex-start;
 	flex-wrap: wrap;
 	background-color: #000000;
-	width: 100%;     /* 가로 크기를 부모 요소나 화면의 100%로 설정 */
-	height: 100%;
+	width: 100%;  /* 부모 컨테이너의 너비를 100%로 설정 */
+	height: 100%;  /* 높이를 화면의 100%로 설정 */
+	overflow-x: auto;  /* 콘텐츠가 부모 요소의 범위를 벗어나면 스크롤 생김 */
+	padding: 20px;
 }
 .body
 {
@@ -222,6 +225,7 @@ footer a:hover {
 	flex-direction: column;
 	width: 70%;
 	padding: 20px;
+	overflow-x: auto;
 }
 
 .user-info-container {

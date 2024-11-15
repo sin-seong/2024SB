@@ -1,7 +1,8 @@
 package com.sin.sb1114.controller;
 
-import com.example.demo.dto.ResponseDTO;
-import com.example.demo.dto.TestRequestBodyDTO;
+
+import com.sin.sb1114.dto.ResponseDTO;
+import com.sin.sb1114.dto.TestRequestBodyDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +36,7 @@ public class TestController {
 
   // /test경로는 이미 존재하므로 /test/testRequestBody로 지정했다.
   @GetMapping("/testRequestBody")
-  public ResponseDTO<String>  testControllerRequestBody(@RequestBody TestRequestBodyDTO testRequestBodyDTO) {
+  public ResponseDTO<String> testControllerRequestBody(@RequestBody TestRequestBodyDTO testRequestBodyDTO) {
     List<String> list = new ArrayList<>();
     list.add("Hello World! I'm ResponseDTO");
     ResponseDTO<String> response = ResponseDTO.<String>builder().data(list).build();

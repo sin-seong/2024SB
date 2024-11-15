@@ -1,6 +1,7 @@
 package com.sin.sb1114.dto;
 
-import com.example.demo.model.TodoEntity;
+
+import com.sin.sb1114.model.TodoEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

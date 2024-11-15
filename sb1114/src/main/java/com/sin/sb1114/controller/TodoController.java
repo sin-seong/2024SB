@@ -1,8 +1,8 @@
 package com.sin.sb1114.controller;
 
 
-import com.example.demo.dto.ResponseDTO;
-import com.example.demo.service.TodoService;
+import com.sin.sb1114.dto.ResponseDTO;
+import com.sin.sb1114.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

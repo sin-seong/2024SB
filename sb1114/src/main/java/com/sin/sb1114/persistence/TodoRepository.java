@@ -1,6 +1,7 @@
 package com.sin.sb1114.persistence;
 
-import com.example.demo.model.TodoEntity;
+import com.sin.sb1114.model.TodoEntity;
+import com.sin.sb1114.model.TodoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
